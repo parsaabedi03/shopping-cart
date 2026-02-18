@@ -1,0 +1,30 @@
+.searchBarContainer {
+  margin: 30px 0;
+}
+.searchBarContainer input {
+  background-color: #fff;
+  outline: none;
+  border: 2px dotted #f97316;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 15px;
+}
+.searchBarContainer input::placeholder {
+  color: #000;
+}
+.searchBarContainer button {
+  background-color: #f97316;
+  color: #fff;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 4px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.searchBarContainer button .icon {
+  height: 20px;
+  width: 20px;
+}
