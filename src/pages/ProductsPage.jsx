@@ -1,7 +1,11 @@
+import SearchBar from "../components/SearchBar";
+
 function ProductsPage() {
   return (
-    <div>ProductsPage</div>
-  )
+    <div>
+      <SearchBar />
+    </div>
+  );
 }
 
-export default ProductsPage
+export default ProductsPage;
