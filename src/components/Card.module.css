@@ -1,0 +1,55 @@
+.card {
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 2px dotted #f97316;
+}
+.card img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 10px auto;
+  display: block;
+}
+.productTitle {
+  color: #f97316;
+  font-size: 20px;
+  font-weight: 700;
+}
+.productPrice {
+  font-size: 15px;
+  font-weight: 500;
+}
+.prodcutDetails {
+  color: #f97316;
+  stroke-width: 2px;
+  width: 23px;
+  height: 23px;
+}
+.info {
+  margin: 40px 0 20px;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttons button {
+  outline: none;
+  border: none;
+  background-color: #f97316;
+  color: #fff;
+  padding: 1px 2px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.buttons .icons {
+  stroke-width: 2px;
+  width: 22px;
+  height: 22px;
+}
+
+.d-none {
+  display: none;
+}
