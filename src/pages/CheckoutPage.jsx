@@ -1,7 +1,8 @@
+import useCart from "../context/cart/useCart";
+
 function CheckoutPage() {
-  return (
-    <div>CheckoutPage</div>
-  )
+  const { state, dispatch } = useCart();
+  return <div>CheckoutPage</div>;
 }
 
-export default CheckoutPage
+export default CheckoutPage;
