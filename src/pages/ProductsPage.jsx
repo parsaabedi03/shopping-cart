@@ -3,6 +3,7 @@ import useProducts from "../context/products/useProducts";
 import Card from "../components/Card";
 
 import styles from "./ProductsPage.module.css";
+import Categories from "../components/Categories";
 
 function ProductsPage() {
   const products = useProducts();
@@ -19,7 +20,9 @@ function ProductsPage() {
           ))}
         </div>
         <div className={styles.category}>
-          <aside><p>this is category</p></aside>
+          <aside>
+            <Categories />
+          </aside>
         </div>
       </div>
     </>
