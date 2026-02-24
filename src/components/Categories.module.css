@@ -1,0 +1,30 @@
+.categories {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dotted #f97316;
+  margin-bottom: 20px;
+}
+.categories p {
+  color: #f97316;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.categories p .icon {
+  margin-right: 10px;
+  vertical-align: top;
+}
+.categories ul {
+  list-style: none;
+}
+.categories ul li {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .categories {
+    margin-left: 20px;
+  }
+}
