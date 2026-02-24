@@ -49,7 +49,11 @@
   width: 22px;
   height: 22px;
 }
-
-.d-none {
-  display: none;
+.buttons span {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 10px;
+}
+.dNone {
+  display: none !important;
 }
