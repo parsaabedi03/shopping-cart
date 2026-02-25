@@ -1,22 +1,50 @@
+import { useEffect, useState } from "react";
+
 import SearchBar from "../components/SearchBar";
 import useProducts from "../context/products/useProducts";
-import Card from "../components/Card";
+import ProductCard from "../components/ProductCard";
+import Categories from "../components/Categories";
 
 import styles from "./ProductsPage.module.css";
-import Categories from "../components/Categories";
 
 function ProductsPage() {
   const products = useProducts();
+  const [search, setSearch] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
+
+  const handleSearch = () => {
+    const normalized = search.toLowerCase().trim();
+
+    if (!normalized) {
+      setFilteredProducts(products);
+      return;
+    }
+
+    const newProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(normalized),
+    );
+
+    setFilteredProducts(newProducts);
+  };
+
   return (
     <>
       <div>
-        <SearchBar />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          handleSearch={handleSearch}
+        />
       </div>
       <div className={styles.container}>
         <div className={styles.productContainer}>
-          {!products.length && <p>is Loading ...</p>}
-          {products.map((product) => (
-            <Card key={product.id} data={product} />
+          {!filteredProducts.length && <p>is Loading ...</p>}
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} data={product} />
           ))}
         </div>
         <div className={styles.category}>
