@@ -3,7 +3,6 @@ import CartContext from "./CartContext";
 
 const initialState = {
   data: [],
-  total: 0,
   status: false,
 };
 
@@ -36,6 +35,12 @@ const reducer = (state, action) => {
             ? { ...item, quantity: item.quantity - 1 }
             : item,
         ),
+      };
+    case "CHECKOUT":
+      return {
+        data: [],
+        total: 0,
+        status: false,
       };
     default:
       throw new Error("Invalid Action");
