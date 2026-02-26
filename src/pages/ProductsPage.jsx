@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 
 import SearchBar from "../components/SearchBar";
 import useProducts from "../context/products/useProducts";
@@ -9,26 +10,35 @@ import styles from "./ProductsPage.module.css";
 
 function ProductsPage() {
   const products = useProducts();
-  const [search, setSearch] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search")?.toLowerCase();
+
+  const [search, setSearch] = useState(searchQuery ?? "");
 
   useEffect(() => {
-    setFilteredProducts(products);
-  }, [products]);
+    const newValue = searchQuery ?? "";
+    if (search !== newValue) {
+      setSearch(newValue);
+    }
+  }, [searchQuery]);
+
+  const filteredProducts = !searchQuery
+    ? products
+    : products.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery),
+      );
 
   const handleSearch = () => {
     const normalized = search.toLowerCase().trim();
 
     if (!normalized) {
-      setFilteredProducts(products);
+      searchParams.delete("search");
+      setSearchParams(searchParams);
       return;
     }
 
-    const newProducts = products.filter((product) =>
-      product.title.toLowerCase().includes(normalized),
-    );
-
-    setFilteredProducts(newProducts);
+    searchParams.append("search", normalized);
+    setSearchParams(searchParams);
   };
 
   return (
