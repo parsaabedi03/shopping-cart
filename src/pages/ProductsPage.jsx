@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import useProducts from "../context/products/useProducts";
 import ProductCard from "../components/ProductCard";
 import Categories from "../components/Categories";
+import Loading from "../components/Loading";
 
 import styles from "./ProductsPage.module.css";
 
@@ -12,6 +13,7 @@ function ProductsPage() {
   const products = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search")?.toLowerCase();
+  const categoryQuery = searchParams.get("category")?.toLowerCase();
 
   const [search, setSearch] = useState(searchQuery ?? "");
 
@@ -22,11 +24,19 @@ function ProductsPage() {
     }
   }, [searchQuery]);
 
-  const filteredProducts = !searchQuery
-    ? products
-    : products.filter((product) =>
-        product.title.toLowerCase().includes(searchQuery),
-      );
+  let filteredProducts = products;
+
+  if (searchQuery) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.title.toLowerCase().includes(searchQuery),
+    );
+  }
+
+  if (categoryQuery) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category.toLowerCase() === categoryQuery,
+    );
+  }
 
   const handleSearch = () => {
     const normalized = search.toLowerCase().trim();
@@ -37,7 +47,20 @@ function ProductsPage() {
       return;
     }
 
-    searchParams.append("search", normalized);
+    searchParams.set("search", normalized);
+    setSearchParams(searchParams);
+  };
+
+  const handleCategories = (category) => {
+    const normalized = category.toLowerCase().trim();
+
+    if (normalized === "all") {
+      searchParams.delete("category");
+      setSearchParams(searchParams);
+      return;
+    }
+
+    searchParams.set("category", normalized);
     setSearchParams(searchParams);
   };
 
@@ -51,15 +74,24 @@ function ProductsPage() {
         />
       </div>
       <div className={styles.container}>
-        <div className={styles.productContainer}>
-          {!filteredProducts.length && <p>is Loading ...</p>}
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} data={product} />
-          ))}
-        </div>
+        {!products.length ? (
+          <Loading />
+        ) : (
+          <div className={styles.productContainer}>
+            {!filteredProducts.length && !!products.length && (
+              <p>there is no product</p>
+            )}
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} data={product} />
+            ))}
+          </div>
+        )}
         <div className={styles.category}>
           <aside>
-            <Categories />
+            <Categories
+              handleCategories={handleCategories}
+              categoryQuery={categoryQuery}
+            />
           </aside>
         </div>
       </div>

@@ -19,10 +19,18 @@
   list-style: none;
 }
 .categories ul li {
-  margin-bottom: 10px;
+  padding: 10px;
   font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
 }
+.categories ul li:hover{
+  background-color: #efe9e4;
 
+}
+.categories .selected{
+  background-color: #e9d2c1;
+}
 @media (min-width: 768px) {
   .categories {
     margin-left: 20px;

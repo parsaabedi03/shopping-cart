@@ -2,7 +2,7 @@ import { ChartBar } from "lucide-react";
 
 import styles from "./Categories.module.css";
 
-function Categories() {
+function Categories({ handleCategories, categoryQuery }) {
   const data = [
     { id: 1, name: "All" },
     { id: 2, name: "Electronics" },
@@ -18,7 +18,15 @@ function Categories() {
       </p>
       <ul>
         {data.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <li
+            key={item.id}
+            className={
+              item.name.toLowerCase() === categoryQuery ? styles.selected : ""
+            }
+            onClick={() => handleCategories(item.name)}
+          >
+            {item.name}
+          </li>
         ))}
       </ul>
     </div>
