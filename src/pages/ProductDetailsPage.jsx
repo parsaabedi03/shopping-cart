@@ -5,6 +5,7 @@ import { ArrowLeft, SquareStack, Tag } from "lucide-react";
 import api from "../services/config";
 
 import styles from "./ProductDetailsPage.module.css";
+import Loading from "../components/Loading";
 
 function ProductDetailsPage() {
   const [productDetails, setProductDetails] = useState(null);
@@ -48,7 +49,7 @@ function ProductDetailsPage() {
           </div>
         </>
       ) : (
-        <p>is Loading ...</p>
+        <Loading />
       )}
     </div>
   );
